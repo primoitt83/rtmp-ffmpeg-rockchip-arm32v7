@@ -292,7 +292,8 @@ RUN apk add --no-cache \
   gettext \
   openssl \
   pcre \
-  curl
+  curl \
+  alsa-utils
 
 # Cleanup.
 RUN rm -rf /var/cache/* /tmp/*
