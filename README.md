@@ -8,6 +8,8 @@ Inspired by:
 
 https://github.com/hbiyik/FFmpeg
 
+https://github.com/jjm2473/ffmpeg-rk
+
 https://github.com/wader/static-ffmpeg
 
 https://github.com/alfg/docker-nginx-rtmp
@@ -51,7 +53,7 @@ With nginx-rtmp image ready, you can shoot ffmpeg from it like this:
 Remember to change image name as need it:
 
 ````
-armv32v7: rtmp-ffmpeg-rockchip-arm32v7
+armv32v7: rtmp-ffmpeg-rockchip-arm32v7_rtmp:latest
 
 x86: rtmp:rockchip
 ````
@@ -62,7 +64,7 @@ docker run -i --rm \
     --cap-add=SYS_ADMIN \
     -v $PWD:/tmp \
     --name test \
-    rtmp-ffmpeg-rockchip-arm32v7 \
+    rtmp-ffmpeg-rockchip-arm32v7_rtmp:latest \
     ffmpeg -buildconf
 ````
 
@@ -75,7 +77,7 @@ docker run -i --rm \
     --cap-add=SYS_ADMIN \
     -v $PWD:/tmp \
     --name test \
-    rtmp-ffmpeg-rockchip-arm32v7 \
+    rtmp-ffmpeg-rockchip-arm32v7_rtmp:latest \
     ffmpeg -y -c:v h264 -i /tmp/BBB.mp4 \
     -an \
     -c:v libx264 -vf scale=w=640:h=360 \
@@ -91,7 +93,7 @@ docker run -i --rm \
     --cap-add=SYS_ADMIN \
     -v $PWD:/tmp \
     --name test \
-    rtmp-ffmpeg-rockchip-arm32v7 \
+    rtmp-ffmpeg-rockchip-arm32v7_rtmp:latest \
     ffmpeg -re -stream_loop -1 -i /tmp/BBB.mp4 \
     -c: copy -tune zerolatency \
     -f flv rtmp://192.168.5.99:1935/live/bbb
@@ -124,7 +126,7 @@ docker run -i --rm \
         [ -e "/dev/$dev" ] && echo " --device /dev/$dev"; \
     done` \
     -v "$PWD":/tmp \
-    rtmp-ffmpeg-rockchip-arm32v7 \
+    rtmp-ffmpeg-rockchip-arm32v7_rtmp:latest \
     ffmpeg -y -hwaccel drm -hwaccel_device /dev/dri/renderD128 \
     -f alsa -thread_queue_size 12000 -i sysdefault:CARD=CameraB409241 \
     -f v4l2 -thread_queue_size 12000 -i /dev/video0 \
